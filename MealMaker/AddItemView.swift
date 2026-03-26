@@ -4,12 +4,17 @@ import SwiftUI
 struct AddItemView : View {
     
     @Environment(\.dismiss) private var dismiss
-    
-    
     @State var itemName: String
-    //@State var itemCount: Int
     let onAdd: (String) -> Void
     
+    @FocusState private var textFieldHasFocus
+    
+    func add(){
+        if itemName.isEmpty {return}
+        onAdd(itemName)
+        itemName = ""
+        textFieldHasFocus = true
+    }
     
     var body : some View {
         
@@ -18,18 +23,16 @@ struct AddItemView : View {
             Form {
                 
                 Section {
-                    TextField("Item name", text:$itemName)
-                    
-//                    Stepper (value: $itemCount, in: 1...100, step:1) {
-//                        Text("Quantity: \(itemCount)")
-//                    }
+                    TextField("Item name", text:$itemName).focused($textFieldHasFocus)
+                }.onAppear{
+                    textFieldHasFocus = true
+                }.onSubmit {
+                    add()
                 }
                 
                 
                 Button("Add"){
-                    onAdd(itemName)
-                    itemName = ""
-                  //  itemCount = 1
+                    add()
                 }.disabled(itemName.isEmpty)
                 
                 Section {
@@ -40,15 +43,8 @@ struct AddItemView : View {
                 
             }.navigationTitle("Add new items")
             
-            
-            
-            
         }
         
-        
-        
     }
-    
-    
     
 }
