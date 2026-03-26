@@ -27,7 +27,7 @@ struct Ingredient: Identifiable, Hashable {
     var name: String
     var quantity: Int
     
-    @Guide(description: "The unit to use. If the items are measures solely by how many there are use the count value. Only use pinch if the name is salt")
+    @Guide(description: "The unit to use. If the items are measures solely by how many there are use the count value.")
     var unit: Unit
     
     var id : String {

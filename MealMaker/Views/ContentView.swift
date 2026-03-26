@@ -2,9 +2,10 @@ import SwiftUI
 
 struct ContentView: View {
     
-    var model = Model()
+    var model = MealGenerator()
     
     @State var thinking = false
+    @State var started = false
     
     @State var ingredients = ["Bread", "Cheese", "Tomato", "Bacon", "Ketchup", "Lettuce", "Burger", "Sauce", "Onion"]
     
@@ -27,6 +28,7 @@ struct ContentView: View {
                 .toolbar {
                     ToolbarItem {
                         Button("Get meal", role: .confirm){
+                            started = true
                             thinking = true
                             Task {
                                 
@@ -51,16 +53,22 @@ struct ContentView: View {
                     ToolbarItem(placement: .topBarLeading, content: {
                         Button("Start again", role: .destructive){
                             ingredients = []
+                            started = false
                         }
                     })
                 }
                 
-                if let meal = model.meal {
+                if let meal = model.meal, started {
                     MealView(meal: meal).padding()
                 } else {
                     if thinking {
                         Text("Thinking")
                         ProgressView()
+                    } else if !started {
+                        Text("Add ingredients and then tap Get Meal")
+                    }
+                    else {
+                        Text(model.error ?? "Unknown error")
                     }
                 }
                 Spacer()

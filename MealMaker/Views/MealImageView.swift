@@ -5,7 +5,6 @@ struct MealImageView: View {
     
     var description: String
     @State private var image: Image? = nil
-    @State private var isGenerating = false
     
     var body: some View {
         VStack {
@@ -28,13 +27,10 @@ struct MealImageView: View {
     }
     
     func generateImage() async {
-        isGenerating = true
-        defer { isGenerating = false }
+       
         
-            // let prompt = "A cute cat wearing a wizard hat, digital art"
         
         do {
-            // Create the image request
             let creator = try await ImageCreator()
             let images = creator.images(for: [.text(description)], style: .illustration, limit: 1)
             
