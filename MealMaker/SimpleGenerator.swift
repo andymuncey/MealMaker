@@ -3,7 +3,6 @@ import SwiftUI
 
 @Observable class SimpleGenerator {
     
-    private var session = LanguageModelSession()
     private(set) var idea: String?
     private(set) var error: String?
     
@@ -11,23 +10,23 @@ import SwiftUI
       
         error = nil
         idea = nil
-        let aiModel = SystemLanguageModel.default
-        if !aiModel.isAvailable {
-            //model not available
+        
+        if !SystemLanguageModel.default.isAvailable {
             return
         }
    
         do {
-            let prompt = "Suggest something to do to celebrate finishing my studies at the University of Chester. Local ideas would be great"
+            let session = LanguageModelSession()
+            let prompt = "I've just graduated from university of Chester, what can I do to celebrate, in or around Chester?"
             let response = try await session.respond(to: prompt)
             idea = response.content
             error = nil
         }
         catch LanguageModelSession.GenerationError.guardrailViolation(let context){
-            self.error = "Unable to geneate meal for safety reasons: \(context.debugDescription)"
+            self.error = "Unable to geneate response for safety reasons: \(context.debugDescription)"
         }
         catch {
-            self.error = "Unable to generate meal"
+            self.error = "Unable to generate response"
         }
         
     }

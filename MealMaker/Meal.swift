@@ -18,7 +18,6 @@ struct Meal {
     
     var overview : String {
         return "\(name): \(description). You need \(ingredients) and to follow these steps: \(steps)"
-        
     }
 }
 

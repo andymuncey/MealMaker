@@ -31,7 +31,8 @@ struct MealView : View {
                     }
                 }.listStyle(.plain)
             }
-            MealImageView(description: meal.description)
+            
+            GeneratedImageView(description: meal.description)
         }
     }
 }

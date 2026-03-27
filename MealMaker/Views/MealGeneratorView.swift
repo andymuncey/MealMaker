@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ContentView: View {
+struct MealGeneratorView: View {
     
     var model = MealGenerator()
     
@@ -47,13 +47,15 @@ struct ContentView: View {
                                 }
                             }
                         } label: {
-                            Text("Add Ingredient")
+                            Label("Add ingredient", systemImage: "plus")
                         }
                     }
                     ToolbarItem(placement: .topBarLeading, content: {
-                        Button("Start again", role: .destructive){
+                        Button(role: .destructive) {
                             ingredients = []
                             started = false
+                        } label: {
+                            Label("Start again", systemImage: "arrow.clockwise")
                         }
                     })
                 }
@@ -80,5 +82,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    MealGeneratorView()
 }

@@ -1,10 +1,3 @@
-//
-//  SimpleGeneratorView.swift
-//  MealMaker
-//
-//  Created by Andrew Muncey on 26/03/2026.
-//
-
 import SwiftUI
 
 struct SimpleGeneratorView: View {
@@ -15,10 +8,12 @@ struct SimpleGeneratorView: View {
     var body: some View {
         Button("Generate"){
             thinking = true
-            Task {await generator.generate()
-            thinking = false
+            Task {
+                await generator.generate()
+                thinking = false
             }
         }.disabled(thinking)
+        
         if thinking {
             Text("Thinking")
             ProgressView()
