@@ -50,7 +50,7 @@ struct MealGeneratorView: View {
                             Label("Add ingredient", systemImage: "plus")
                         }
                     }
-                    ToolbarItem(placement: .topBarLeading, content: {
+                    ToolbarItem(placement: .navigation, content: {
                         Button(role: .destructive) {
                             ingredients = []
                             started = false

@@ -24,7 +24,7 @@ import SwiftUI
             meal = response.content
 
         }
-        catch LanguageModelSession.GenerationError.guardrailViolation(let context){
+        catch LanguageModelError.guardrailViolation(let context){
             self.error = "Unable to geneate meal for safety reasons: \(context.debugDescription)"
         }
         catch {

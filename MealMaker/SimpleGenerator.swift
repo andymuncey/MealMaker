@@ -22,7 +22,7 @@ import SwiftUI
             idea = response.content
             error = nil
         }
-        catch LanguageModelSession.GenerationError.guardrailViolation(let context){
+        catch LanguageModelError.guardrailViolation(let context){
             self.error = "Unable to geneate response for safety reasons: \(context.debugDescription)"
         }
         catch {
